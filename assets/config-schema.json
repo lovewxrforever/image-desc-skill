@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "image-desc Config",
+  "description": "Configuration schema for image-desc skill",
+  "type": "object",
+  "properties": {
+    "service": {
+      "type": "string",
+      "description": "Vision provider name",
+      "enum": ["dashscope", "openai", "gemini", "ollama", "openrouter", "custom"],
+      "default": "dashscope"
+    },
+    "api_key": {
+      "type": "string",
+      "description": "API key for the selected provider",
+      "minLength": 1
+    },
+    "model": {
+      "type": "string",
+      "description": "Model name override (empty = use provider default)"
+    },
+    "base_url": {
+      "type": "string",
+      "description": "Custom API base URL (only for 'custom' service type)",
+      "format": "uri"
+    }
+  },
+  "required": ["service"],
+  "dependentRequired": {
+    "custom": ["base_url"]
+  }
+}
